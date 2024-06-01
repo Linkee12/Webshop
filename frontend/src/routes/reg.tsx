@@ -1,16 +1,28 @@
+/* eslint-disable promise/always-return */
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Reg() {
-  const [inputs, setInputs] = useState({});
+  type Inputs = {
+    username: string;
+    email: string;
+    password: string;
+    password2: string;
+  };
+  const [inputs, setInputs] = useState<Inputs>({
+    username: "",
+    email: "",
+    password: "",
+    password2: "",
+  });
   const [sing, setSing] = useState("...");
   const navigate = useNavigate();
   const [log, setLog] = useState("");
 
-  function handleSubmit(event) {
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    fetch("http://localhost:5173/api/reg", {
+    fetch("http://localhost:3001/api/reg", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -27,7 +39,7 @@ export default function Reg() {
       });
   }
 
-  const handleChange = (event) => {
+  const handleChange = (event: React.FormEvent<HTMLFormElement>) => {
     const name = event.target.name;
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
