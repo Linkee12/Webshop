@@ -1,0 +1,118 @@
+body {
+   background-image: url("/images/bg.jpg");
+   background-size: cover;
+   background-repeat: no-repeat;
+}
+
+button {
+   background: none;
+   border: none;
+   outline: none;
+   box-shadow: none;
+}
+
+img {
+   width: 6.2rem;
+   height: 6.2rem;
+}
+
+.container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   max-width: 280px;
+   margin: 280px;
+}
+
+
+.button {
+   align-self: center;
+   padding: 5px;
+   padding-left: 20px;
+   padding-right: 20px;
+   margin: 10px;
+   border-radius: 5px;
+   width: min-content;
+   font-weight: bold;
+   background-color: rgb(158, 170, 177);
+}
+
+.button2 {
+   align-self: center;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   justify-content: end;
+   padding: 5px;
+   border-radius: 5px;
+   width: min-content;
+   font-weight: bold;
+   background-color: rgb(158, 170, 177);
+
+
+}
+
+.button:hover,
+.button2:hover {
+
+   background-color: rgb(59, 84, 99);
+   transition-duration: 0.3s;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 600000s 0s, color 600000s 0s;
+}
+input[data-autocompleted] {
+    background-color: transparent !important;
+}
+input {
+   width: 230px;
+   padding: 10px 20px;
+   border-color: transparent;
+   border-bottom: 3px solid rgb(158, 170, 177);
+   font-size: 15px;
+   background: transparent;
+   align-self: center;
+   font-weight: bold;
+   font-size: medium;
+}
+
+.navigationButtons {
+   text-underline-offset: 5px;
+   font-weight: 700;
+   font-size: 1.3rem;
+
+}
+
+.navigationButtons:hover {
+   background-color: rgb(59, 84, 99);
+   border-radius: 0.5rem;
+   transition-duration: 0.3s;
+   width: 6.2rem;
+   text-align: left;
+}
+
+.buttons {
+   display: flex;
+}
+
+
+
+.material-symbols-outlined {
+   scale: 1.2;
+   margin-right: 4px;
+   padding-bottom: 2px;
+
+}
+
+
+.category {
+   margin: 1rem;
+   width: 7rem;
+}
+
+.category:hover {
+   background-color: rgb(59, 84, 99);
+   border-radius: 0.5rem;
+   transition-duration: 0.3s;
+}
+

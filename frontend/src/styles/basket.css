@@ -1,0 +1,60 @@
+.basketLines,
+.basketLinesAll {
+    display: flex;
+    align-items: center;
+    color: rgb(0, 0, 0);
+    height: 3rem;
+    background-color: rgba(0, 0, 0, 0.15);
+    margin: 0.2rem;
+    border-radius: 0.5rem;
+    font-family: 'Lucida Grande';
+    font-weight: 800;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.basketLinesAll {
+    justify-content: center;
+    font-size: 2rem;
+    align-items: center;
+}
+
+.lineImages {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.6rem;
+    margin-right: 1.5rem;
+}
+
+.name {
+    flex-grow: 1;
+}
+
+.deleteButton {
+    align-items: center;
+    padding-left: 0.3rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.3rem;
+}
+
+.price {
+    margin: 0.7rem
+}
+
+.deleteButton:hover,
+.buyButton:hover {
+
+    background-color: rgb(59, 84, 99);
+    transition-duration: 0.3s;
+}
+
+.buyButton {
+    background-color: rgba(0, 0, 0, 0.15);
+    width: 6rem;
+    height: 2.6rem;
+    border-radius: .3rem;
+    margin-left: 2rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+}

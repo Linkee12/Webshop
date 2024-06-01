@@ -1,0 +1,84 @@
+pre {
+   text-align: center;
+   font-weight: 800;
+   font-size: larger;
+   margin: 0.1rem
+}
+
+.storeconti {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+}
+
+.products {
+   height: 16.2rem;
+   margin: 0.5rem;
+   padding: 0.3rem;
+   background-color: rgb(91, 100, 114);
+   border-radius: 0.5rem;
+   flex: 0 1 calc(15% - 1em);
+
+}
+
+.produceImages {
+   width: 10rem;
+   height: 10rem;
+   border-radius: 0.5rem;
+
+}
+
+
+.basket {
+   padding-top: 6px;
+   border-radius: 5px;
+   font-weight: bold;
+   background-color: rgb(158, 170, 177);
+   text-align: center;
+   width: 10rem
+}
+
+.categories:hover,
+.basket:hover {
+
+   background-color: rgb(59, 84, 99);
+   transition-duration: 0.3s;
+}
+
+.categories {
+   width: 11rem;
+   height: 13rem;
+   border-radius: 0.5rem;
+   text-align: center;
+   font-weight: bolder;
+   font-size: 1.3rem;
+   background-color: rgb(91, 100, 114);
+   padding-top: 0.8rem;
+   margin: 0.3rem;
+}
+
+.productconti {
+   display: flex;
+   flex-wrap: wrap;
+}
+
+.pageChange {
+   font-size: larger;
+   font-weight: 700;
+   width: 2rem;
+   height: 2rem;
+   background-color: rgb(35, 55, 55);
+   margin: 3px;
+   padding: 3px;
+   border-radius: 5px;
+}
+.pageChange:hover{
+
+   background-color: rgb(13, 37, 42);
+}
+
+.pageChangerContainer {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
