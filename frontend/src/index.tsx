@@ -24,6 +24,20 @@ if (getElem != null) {
   root.render(<App />);
 }
 
+export type SpringProps = {
+  x: number;
+  y: number;
+  transition: string;
+  fontSize: string;
+  opacity: number;
+  fontWeight: number;
+  backgroundColor: string;
+  borderRadius: number;
+  padding: number;
+  textAlign: string;
+  width: number;
+  marginTop: string;
+};
 function App() {
   let token = localStorage.getItem("token");
 

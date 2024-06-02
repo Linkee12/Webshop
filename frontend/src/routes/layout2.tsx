@@ -1,10 +1,11 @@
 import "../styles/layout2.css";
+import type { SpringProps } from "../index";
 
 import { animated } from "@react-spring/web";
 import { Outlet, useNavigate } from "react-router-dom";
 type Layout2 = {
   setIsLoggedIn: (setIsLoggedIn: boolean) => void;
-  springs: () => void;
+  springs: () => SpringProps;
   productName: string;
 };
 export default function Layout2(props: Layout2) {

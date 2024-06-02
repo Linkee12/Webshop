@@ -39,6 +39,7 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 app.post("/login", (req: Request, res: Response) => {
+  console.log("asd");
   //TODO: handle catch branch
   //TODO: create tokenservice
   //TODO: create middleware

@@ -39,9 +39,9 @@ export default function Reg() {
       });
   }
 
-  const handleChange = (event: React.FormEvent<HTMLFormElement>) => {
-    const name = event.target.name;
-    const value = event.target.value;
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const name = event.currentTarget.name;
+    const value = event.currentTarget.value;
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
@@ -75,7 +75,7 @@ export default function Reg() {
           onChange={handleChange}
         />
         <div className="buttons">
-          <button className="button" type="submit" onClick={handleSubmit}>
+          <button className="button" type="submit" onClick={() => handleSubmit}>
             Registration
           </button>
           <button
