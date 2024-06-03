@@ -1,3 +1,4 @@
+/* eslint-disable promise/always-return */
 import "../styles/store.css";
 
 import { useEffect, useState } from "react";
@@ -14,7 +15,7 @@ export default function Category(props: Props) {
   const navigate = useNavigate();
   useEffect(() => {
     const currentToken = localStorage.getItem("token");
-    fetch("http://localhost:5173/api/getcategory", {
+    fetch("http://localhost:3000/api/getcategory", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${currentToken}`,

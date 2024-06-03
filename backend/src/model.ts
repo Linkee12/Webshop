@@ -55,6 +55,6 @@ export async function getProducts(id: number, pageNumber: number) {
   return await mysqlQuery<Products[]>(sql, [id, pageNumber * 10]);
 }
 export async function getBasketContent(id: number) {
-  const sql = "SELECT id,catid,name,price,avaliable FROM products where id in (?)";
+  const sql = "SELECT id,catid,name,price,avaliable FROM products where catid=?";
   return await mysqlQuery<Products[]>(sql, [id]);
 }

@@ -22,7 +22,6 @@ const errorMessage: string = "Something wnt wrong";
 app.use(express.json());
 
 const auth = async (req: Request, res: Response, next: NextFunction) => {
-  console.log("sw");
   try {
     const auth = req.headers.authorization;
     if (typeof auth != "string") {
@@ -39,7 +38,6 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 app.post("/login", (req: Request, res: Response) => {
-  console.log("asd");
   //TODO: handle catch branch
   //TODO: create tokenservice
   //TODO: create middleware
@@ -90,7 +88,7 @@ app.post("/getNewToken", async (req: Request, res: Response) => {
   }
 });
 
-app.get("/getcategory", auth, async (_req: Request, res: Response) => {
+app.post("/getcategory", auth, async (_req: Request, res: Response) => {
   try {
     const categories = await getCategory();
     res.send(categories);

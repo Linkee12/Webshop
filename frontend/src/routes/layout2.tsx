@@ -1,21 +1,63 @@
 import "../styles/layout2.css";
-import type { SpringProps } from "../index";
 
-import { animated } from "@react-spring/web";
+import { animated, useSpring } from "@react-spring/web";
+import { useEffect, useRef } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-type Layout2 = {
+type Layout2Props = {
   setIsLoggedIn: (setIsLoggedIn: boolean) => void;
-  springs: () => SpringProps;
+  isCartVisible: boolean;
   productName: string;
+  onHide: () => void;
 };
-export default function Layout2(props: Layout2) {
+
+function useEffectChangesOnly(callback: () => void, dependencies: unknown[]) {
+  const isFirstRun = useRef(true);
+  useEffect(() => {
+    if (isFirstRun) {
+      isFirstRun.current = false;
+    } else {
+      callback();
+    }
+  }, [...dependencies, isFirstRun]);
+}
+export default function Layout2(props: Layout2Props) {
   const navigate = useNavigate();
 
   function logout() {
     props.setIsLoggedIn(false);
     localStorage.removeItem("token");
   }
-
+  const [springs, api] = useSpring(() => ({
+    from: {
+      x: -444,
+      y: 0,
+    },
+  }));
+  const show = () => {
+    api.start({
+      from: {
+        x: -444,
+        y: 0,
+      },
+      to: {
+        x: 0,
+        y: 0,
+      },
+    });
+    setTimeout(props.onHide, 3000);
+  };
+  function hide() {
+    api.start({
+      from: {
+        x: 0,
+        y: 0,
+      },
+      to: {
+        x: -444,
+        y: 0,
+      },
+    });
+  }
   return (
     <div>
       <div className="conti">
@@ -64,7 +106,17 @@ export default function Layout2(props: Layout2) {
           <div>
             <animated.div
               style={{
-                ...props.springs,
+                transition: "1s",
+                fontSize: "1rem",
+                opacity: 1,
+                fontWeight: 800,
+                backgroundColor: "rgba(0,0,0,0.15)",
+                borderRadius: 12,
+                padding: 4,
+                textAlign: "center",
+                width: 120,
+                marginTop: "2rem",
+                ...springs,
               }}
             >
               <div style={{ color: "#000000" }}>

@@ -21,7 +21,7 @@ export default function Store(props: Props) {
   const [pageNumber, setPageNumber] = useState<number>(0);
   useEffect(() => {
     const currentToken = localStorage.getItem("token");
-    fetch("http://localhost:5173/api/getproducts", {
+    fetch("http://localhost:3000/api/getproducts", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${currentToken}`,

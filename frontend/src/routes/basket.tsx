@@ -18,19 +18,20 @@ export default function Basket() {
   }, []);
   useEffect(() => {
     const newArray = [...new Set(storedItems)];
-
-    fetch("http://localhost:5173/api/basket", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${currentToken}`,
-        Accept: "application/json",
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(newArray),
-    })
-      .then((json) => json.json())
-      .then((data) => setLineItems(data.map((p: object) => ({ product: p, qty: 1 }))))
-      .catch((err) => console.error(err));
+    if (newArray.length != 0) {
+      fetch("http://localhost:3000/api/basket", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${currentToken}`,
+          Accept: "application/json",
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(newArray),
+      })
+        .then((json) => json.json())
+        .then((data) => setLineItems(data.map((p: object) => ({ product: p, qty: 1 }))))
+        .catch((err) => console.error(err));
+    }
   }, [storedItems]);
 
   const sum: number = lineItems

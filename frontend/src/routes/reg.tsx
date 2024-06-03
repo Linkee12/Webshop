@@ -22,7 +22,7 @@ export default function Reg() {
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    fetch("http://localhost:3001/api/reg", {
+    fetch("http://localhost:3000/api/reg", {
       method: "POST",
       headers: {
         Accept: "application/json",

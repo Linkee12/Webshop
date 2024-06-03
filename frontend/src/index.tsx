@@ -1,7 +1,5 @@
 /* eslint-disable promise/always-return */
 import "./style.css";
-
-import { useSpring } from "@react-spring/web";
 import { isJwtExpired } from "jwt-check-expiration";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -24,27 +22,13 @@ if (getElem != null) {
   root.render(<App />);
 }
 
-export type SpringProps = {
-  x: number;
-  y: number;
-  transition: string;
-  fontSize: string;
-  opacity: number;
-  fontWeight: number;
-  backgroundColor: string;
-  borderRadius: number;
-  padding: number;
-  textAlign: string;
-  width: number;
-  marginTop: string;
-};
 function App() {
   let token = localStorage.getItem("token");
 
   useEffect(() => {
     if (token) {
       const intervaslId = setInterval(() => {
-        fetch("http://localhost:3001/api/getNewToken", {
+        fetch("http://localhost:3000/api/getNewToken", {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
@@ -70,47 +54,8 @@ function App() {
   const [isloggedIn, setIsLoggedIn] = useState(token ? !isJwtExpired(token) : false);
   const [categoryId, setCategoryId] = useState<number>();
   const [productName, setProductName] = useState("");
-  const [springs, api] = useSpring(() => ({
-    from: {
-      x: -444,
-      y: 0,
-      transition: "1s",
-      fontSize: "1rem",
-      opacity: 1,
-      fontWeight: 800,
-      backgroundColor: "rgba(0,0,0,0.15)",
-      borderRadius: 12,
-      padding: 4,
-      textAlign: "center",
-      width: 120,
-      marginTop: "2rem",
-    },
-  }));
-  const show = () => {
-    api.start({
-      from: {
-        x: -444,
-        y: 0,
-      },
-      to: {
-        x: 0,
-        y: 0,
-      },
-    });
-    setTimeout(hide, 3000);
-  };
-  function hide() {
-    api.start({
-      from: {
-        x: 0,
-        y: 0,
-      },
-      to: {
-        x: -444,
-        y: 0,
-      },
-    });
-  }
+  const [isCartVisible, setIsCartVisible] = useState(false);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -119,8 +64,9 @@ function App() {
             element={
               <Layout2
                 setIsLoggedIn={setIsLoggedIn}
-                springs={springs}
+                isCartVisible={isCartVisible}
                 productName={productName}
+                onHide={() => setIsCartVisible(false)}
               />
             }
           >
@@ -132,7 +78,7 @@ function App() {
                 element={
                   <Store
                     categoryId={categoryId}
-                    show={show}
+                    show={() => setIsCartVisible(true)}
                     setProductName={setProductName}
                   />
                 }
