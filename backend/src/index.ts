@@ -65,7 +65,7 @@ app.post("/login", (req: Request, res: Response) => {
 });
 
 app.post("/reg", async (req: Request, res: Response) => {
-  if (!(await isUserExisting(req.body.email, req.body.username))) {
+  if ((await isUserExisting(req.body.email, req.body.username)).length == 0) {
     const salt = createHash.randomBytes(5).toString("hex");
     addUser(req.body.username, req.body.email, sha256(req.body.password + salt), salt)
       .then(() => {

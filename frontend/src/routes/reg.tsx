@@ -22,6 +22,10 @@ export default function Reg() {
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (check(inputs)) {
+      setLog("Password dosen't matches");
+      return;
+    }
     fetch("http://localhost:3000/api/reg", {
       method: "POST",
       headers: {
@@ -94,4 +98,8 @@ export default function Reg() {
       <div style={{ color: "red" }}>{log}</div>
     </div>
   );
+
+  function check(inputs: Inputs): boolean {
+    return inputs.password != inputs.password2 ? true : false;
+  }
 }
