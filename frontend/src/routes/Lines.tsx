@@ -11,7 +11,7 @@ export default function Lines(props: Line) {
   return (
     <div className="basketLines" key={props.lineItem.product.id}>
       <img
-        src={`../src/images/category/${props.lineItem.product.catid}/${props.lineItem.product.id}.jpg`}
+        src={`/images/category/${props.lineItem.product.catid}/${props.lineItem.product.id}.jpg`}
         alt={props.lineItem.product.name}
         className="lineImages"
       />

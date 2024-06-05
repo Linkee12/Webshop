@@ -1,7 +1,7 @@
 import "../styles/layout2.css";
 
 import { animated, useSpring } from "@react-spring/web";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 type Layout2Props = {
   setIsLoggedIn: (setIsLoggedIn: boolean) => void;
@@ -10,19 +10,15 @@ type Layout2Props = {
   onHide: () => void;
 };
 
-function useEffectChangesOnly(callback: () => void, dependencies: unknown[]) {
-  const isFirstRun = useRef(true);
-  useEffect(() => {
-    if (isFirstRun) {
-      isFirstRun.current = false;
-    } else {
-      callback();
-    }
-  }, [...dependencies, isFirstRun]);
-}
 export default function Layout2(props: Layout2Props) {
+  useEffect(() => {
+    if (!props.isCartVisible) {
+      hide();
+    } else {
+      show();
+    }
+  }, [props.isCartVisible]);
   const navigate = useNavigate();
-
   function logout() {
     props.setIsLoggedIn(false);
     localStorage.removeItem("token");
