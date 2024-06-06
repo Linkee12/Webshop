@@ -49,7 +49,7 @@ function App() {
     }
   }, []);
 
-  token = localStorage.getItem("token");
+  token = localStorage.getItem("token") == undefined && null;
 
   const [isloggedIn, setIsLoggedIn] = useState(token ? !isJwtExpired(token) : false);
   const [categoryId, setCategoryId] = useState<number>();

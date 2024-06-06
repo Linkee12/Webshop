@@ -64,7 +64,7 @@ app.post("/login", (req: Request, res: Response) => {
     .catch(error);
 });
 
-app.post("/reg", async (req: Request, res: Response) => {
+app.post("/reg", check, async (req: Request, res: Response) => {
   if ((await isUserExisting(req.body.email, req.body.username)).length == 0) {
     const salt = createHash.randomBytes(5).toString("hex");
     addUser(req.body.username, req.body.email, sha256(req.body.password + salt), salt)
@@ -121,6 +121,22 @@ app.post("/basket", auth, async (req: Request, res: Response) => {
     res.status(500).send(errorMessage);
   }
 });
+
+function check(req: Request, res: Response, next: NextFunction) {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[A-Za-z0-9]{8,}$/;
+  const usernamePattern = /^[A-Za-z0-9]{2,8}$/;
+
+  if (!usernamePattern.test(req.body.username)) {
+    res.send({ message: "Invalid username" });
+  } else if (!emailPattern.test(req.body.email)) {
+    res.send({ message: "Invalid e-mail" });
+  } else if (!passwordPattern.test(req.body.password)) {
+    res.send({ message: "Invalid password" });
+  } else {
+    next();
+  }
+}
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
