@@ -1,7 +1,7 @@
 /* eslint-disable promise/always-return */
 import "./style.css";
 import { isJwtExpired } from "jwt-check-expiration";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useEffect } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
@@ -49,12 +49,16 @@ function App() {
     }
   }, []);
 
-  token = localStorage.getItem("token") == undefined && null;
+  token = localStorage.getItem("token");
+  if (token == undefined) {
+    token = null;
+  }
 
   const [isloggedIn, setIsLoggedIn] = useState(token ? !isJwtExpired(token) : false);
   const [categoryId, setCategoryId] = useState<number>();
   const [productName, setProductName] = useState("");
   const [isCartVisible, setIsCartVisible] = useState(false);
+  const isFirstRun = useRef<boolean>(true);
 
   return (
     <BrowserRouter>
@@ -67,6 +71,7 @@ function App() {
                 isCartVisible={isCartVisible}
                 productName={productName}
                 onHide={() => setIsCartVisible(false)}
+                isFirstRun={isFirstRun}
               />
             }
           >

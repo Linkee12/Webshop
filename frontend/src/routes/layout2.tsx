@@ -1,18 +1,19 @@
 import "../styles/layout2.css";
-
 import { animated, useSpring } from "@react-spring/web";
 import { useEffect } from "react";
+import { MutableRefObject } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 type Layout2Props = {
   setIsLoggedIn: (setIsLoggedIn: boolean) => void;
   isCartVisible: boolean;
   productName: string;
   onHide: () => void;
+  isFirstRun: MutableRefObject<boolean>;
 };
 
 export default function Layout2(props: Layout2Props) {
   useEffect(() => {
-    if (!props.isCartVisible) {
+    if (!props.isCartVisible && !props.isFirstRun.current) {
       hide();
     } else {
       show();
@@ -54,6 +55,7 @@ export default function Layout2(props: Layout2Props) {
       },
     });
   }
+  props.isFirstRun.current = false;
   return (
     <div>
       <div className="conti">
