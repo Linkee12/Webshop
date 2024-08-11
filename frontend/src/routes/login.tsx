@@ -27,9 +27,9 @@ export default function Login(props: LoginProps) {
     })
       .then((response) => response.json())
       .then((json) => {
-        setLog(json.token);
-        if (json.token) {
-          localStorage.setItem("token", json.token);
+        setLog(json.access_token);
+        if (json.access_token) {
+          localStorage.setItem("token", json.access_token);
           props.setIsLoggedIn(true);
         }
       })

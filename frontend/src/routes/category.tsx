@@ -16,7 +16,7 @@ export default function Category(props: Props) {
   useEffect(() => {
     const currentToken = localStorage.getItem("token");
     fetch("http://localhost:3000/api/getcategory", {
-      method: "POST",
+      method: "GET",
       headers: {
         Authorization: `Bearer ${currentToken}`,
         Accept: "application/json",

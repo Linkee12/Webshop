@@ -34,12 +34,18 @@ export default function Reg() {
       },
       body: JSON.stringify(inputs),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
       .then((json) => {
         json.message ? setLog(json.message) : setLog(json.error);
       })
       .catch((e) => {
         console.error(e);
+        setLog("An error occurred. Please try again.");
       });
   }
 

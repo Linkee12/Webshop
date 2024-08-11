@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model category {
+  id       Int        @id
+  name     String?    @db.VarChar(50)
+  products products[]
+}
+
+model products {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(50)
+  catid     Int
+  price     Decimal  @db.Decimal(10, 0)
+  avaliable Boolean
+  category  category @relation(fields: [catid], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "products_ibfk_1")
+
+  @@index([catid], map: "catid")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model users {
+  id       Int     @id @default(autoincrement())
+  username String? @db.VarChar(20)
+  email    String? @db.VarChar(50)
+  password String? @db.VarChar(70)
+  salt     String? @db.VarChar(10)
+}
