@@ -21,7 +21,7 @@ let GetproductsController = class GetproductsController {
         this.getProductsService = getProductsService;
     }
     async create(productsBody) {
-        const products = this.getProductsService.getProducts(productsBody);
+        const products = await this.getProductsService.getProducts(productsBody);
         return products;
     }
 };

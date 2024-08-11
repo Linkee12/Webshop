@@ -7,7 +7,7 @@ export class GetproductsController {
   constructor(private getProductsService: GetproductsService) { }
   @Post()
   async create(@Body() productsBody: getProductsBodyDto) {
-    const products = this.getProductsService.getProducts(productsBody);
+    const products = await this.getProductsService.getProducts(productsBody);
 
     return products;
   }

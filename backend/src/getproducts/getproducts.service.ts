@@ -8,9 +8,19 @@ export class GetproductsService {
   async getProducts(getProductsBody: getProductsBodyDto) {
     const products = await this.prisma.products.findMany({
       where: {
-        id: getProductsBody.id,
+        catid: getProductsBody.id,
+
       },
+      skip: getProductsBody.pageNumber * 10,
+      take: (getProductsBody.pageNumber + 1) * 10
     });
-    return products;
+
+    const poductsNumber = await this.prisma.products.count({
+      where: {
+        catid: getProductsBody.id
+      }
+    });
+
+    return [poductsNumber, products];
   }
 }

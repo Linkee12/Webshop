@@ -23,7 +23,7 @@ let BasketController = class BasketController {
         if (basketBody.length == 0) {
             return [];
         }
-        const basket = this.basketService.getBasketContent(basketBody);
+        const basket = await this.basketService.getBasketContent(basketBody);
         return basket;
     }
 };

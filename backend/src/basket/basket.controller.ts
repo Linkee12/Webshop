@@ -3,13 +3,13 @@ import { BasketService } from './basket.service';
 
 @Controller('basket')
 export class BasketController {
-  constructor(private basketService: BasketService) {}
+  constructor(private basketService: BasketService) { }
   @Post()
   async create(@Body() basketBody: number[]) {
     if (basketBody.length == 0) {
       return [];
     }
-    const basket = this.basketService.getBasketContent(basketBody);
+    const basket = await this.basketService.getBasketContent(basketBody);
     return basket;
   }
 }
