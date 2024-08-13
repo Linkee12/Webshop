@@ -36,12 +36,12 @@ function App() {
         })
           .then((res) => res.json())
           .then((newToken) => {
-            localStorage.setItem("token", newToken.token);
+            localStorage.setItem("token", newToken.acces_token);
           })
           .catch((e) => {
             console.error(e);
           });
-      }, 1080000);
+      }, 1080);
 
       return () => {
         clearInterval(intervaslId);

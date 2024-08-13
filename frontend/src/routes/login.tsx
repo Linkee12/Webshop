@@ -27,14 +27,17 @@ export default function Login(props: LoginProps) {
     })
       .then((response) => response.json())
       .then((json) => {
-        setLog(json.access_token);
         if (json.access_token) {
           localStorage.setItem("token", json.access_token);
           props.setIsLoggedIn(true);
+        } else if (json.statusCode == 401) {
+          setLog("Wrong password or email");
+        } else if (json.statusCode == 400) {
+          setLog(json.message[0]);
         }
       })
       .catch((e) => {
-        console.error(e);
+        console.error(e.message);
       });
   }
 

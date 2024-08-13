@@ -1,18 +1,20 @@
-import { Controller, Post, UseGuards, Body } from '@nestjs/common';
+import { Controller, Post, UseGuards, Req } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { AuthService } from 'src/auth/auth.service';
-import { refreshBodyDto } from './refreshBodyDto';
 
 @Controller('getNewToken')
 export class GetNewTokenController {
-  constructor(private jwtService: JwtService) {}
+
+  constructor(private jwtService: JwtService) { }
 
   @UseGuards(AuthService)
   @Post()
-  async getNewToken(@Body() refreshBody: refreshBodyDto) {
+  async getNewToken(@Req() request: Request) {
+
+    const user = request['user'] as { username: string; sub: number }
     const newToken = await this.jwtService.signAsync({
-      username: refreshBody.username,
-      sub: refreshBody.id,
+      username: user.username,
+      sub: user.sub,
     });
 
     return { access_token: newToken };

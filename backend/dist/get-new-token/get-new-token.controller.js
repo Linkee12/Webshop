@@ -16,15 +16,15 @@ exports.GetNewTokenController = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const auth_service_1 = require("../auth/auth.service");
-const refreshBodyDto_1 = require("./refreshBodyDto");
 let GetNewTokenController = class GetNewTokenController {
     constructor(jwtService) {
         this.jwtService = jwtService;
     }
-    async getNewToken(refreshBody) {
+    async getNewToken(request) {
+        const user = request['user'];
         const newToken = await this.jwtService.signAsync({
-            username: refreshBody.username,
-            sub: refreshBody.id,
+            username: user.username,
+            sub: user.sub,
         });
         return { access_token: newToken };
     }
@@ -33,9 +33,9 @@ exports.GetNewTokenController = GetNewTokenController;
 __decorate([
     (0, common_1.UseGuards)(auth_service_1.AuthService),
     (0, common_1.Post)(),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [refreshBodyDto_1.refreshBodyDto]),
+    __metadata("design:paramtypes", [Request]),
     __metadata("design:returntype", Promise)
 ], GetNewTokenController.prototype, "getNewToken", null);
 exports.GetNewTokenController = GetNewTokenController = __decorate([
