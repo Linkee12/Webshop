@@ -16,6 +16,8 @@ import { BasketService } from './basket/basket.service';
 import { JwtService } from '@nestjs/jwt';
 import { GetproductsController } from './getproducts/getproducts.controller';
 import { GetproductsService } from './getproducts/getproducts.service';
+import { GetNewTokenModule } from './get-new-token/get-new-token.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import { GetproductsService } from './getproducts/getproducts.service';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    GetNewTokenModule,
+    AuthModule,
   ],
   controllers: [
     AppController,

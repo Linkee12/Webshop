@@ -18,4 +18,4 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
   providers: [LoginService, PrismaService],
   exports: [LoginService],
 })
-export class LoginModule {}
+export class LoginModule { }

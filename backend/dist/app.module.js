@@ -25,6 +25,8 @@ const basket_service_1 = require("./basket/basket.service");
 const jwt_1 = require("@nestjs/jwt");
 const getproducts_controller_1 = require("./getproducts/getproducts.controller");
 const getproducts_service_1 = require("./getproducts/getproducts.service");
+const get_new_token_module_1 = require("./get-new-token/get-new-token.module");
+const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -35,6 +37,8 @@ exports.AppModule = AppModule = __decorate([
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
             }),
+            get_new_token_module_1.GetNewTokenModule,
+            auth_module_1.AuthModule,
         ],
         controllers: [
             app_controller_1.AppController,

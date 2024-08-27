@@ -14,18 +14,20 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GetNewTokenController = void 0;
 const common_1 = require("@nestjs/common");
+const config_1 = require("@nestjs/config");
 const jwt_1 = require("@nestjs/jwt");
 const auth_service_1 = require("../auth/auth.service");
 let GetNewTokenController = class GetNewTokenController {
-    constructor(jwtService) {
+    constructor(jwtService, configService) {
         this.jwtService = jwtService;
+        this.configService = configService;
     }
     async getNewToken(request) {
         const user = request['user'];
         const newToken = await this.jwtService.signAsync({
-            username: user.username,
             sub: user.sub,
-        });
+            username: user.username,
+        }, { secret: this.configService.get('SECRET'), });
         return { access_token: newToken };
     }
 };
@@ -35,11 +37,12 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Request]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], GetNewTokenController.prototype, "getNewToken", null);
 exports.GetNewTokenController = GetNewTokenController = __decorate([
     (0, common_1.Controller)('getNewToken'),
-    __metadata("design:paramtypes", [jwt_1.JwtService])
+    __metadata("design:paramtypes", [jwt_1.JwtService,
+        config_1.ConfigService])
 ], GetNewTokenController);
 //# sourceMappingURL=get-new-token.controller.js.map
