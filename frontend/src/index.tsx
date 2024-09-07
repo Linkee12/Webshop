@@ -59,9 +59,8 @@ function App() {
   const [isloggedIn, setIsLoggedIn] = useState(token ? !isJwtExpired(token) : false);
   const [categoryId, setCategoryId] = useState<number>();
   const [productName, setProductName] = useState("");
-  const [isCartVisible, setIsCartVisible] = useState(false);
+  const [isCartVisible, setisCartVisible] = useState(false);
   const isFirstRun = useRef<boolean>(true);
-
   return (
     <BrowserRouter>
       <Routes>
@@ -72,8 +71,8 @@ function App() {
                 setIsLoggedIn={setIsLoggedIn}
                 isCartVisible={isCartVisible}
                 productName={productName}
-                onHide={() => setIsCartVisible(false)}
-                isFirstRun={isFirstRun}
+                onHide={() => setisCartVisible(false)}
+                isFirstRun={isFirstRun.current}
               />
             }
           >
@@ -85,7 +84,10 @@ function App() {
                 element={
                   <Store
                     categoryId={categoryId}
-                    show={() => setIsCartVisible(true)}
+                    show={() => {
+                      isFirstRun.current = false;
+                      setisCartVisible(true);
+                    }}
                     setProductName={setProductName}
                   />
                 }

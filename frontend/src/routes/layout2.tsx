@@ -1,25 +1,29 @@
 import "../styles/layout2.css";
 import { animated, useSpring } from "@react-spring/web";
 import { useEffect } from "react";
-import { MutableRefObject } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 type Layout2Props = {
   setIsLoggedIn: (setIsLoggedIn: boolean) => void;
   isCartVisible: boolean;
   productName: string;
   onHide: () => void;
-  isFirstRun: MutableRefObject<boolean>;
+  isFirstRun: boolean;
 };
 
 export default function Layout2(props: Layout2Props) {
+  console.log("isfirstrun: " + props.isFirstRun + props.isCartVisible);
+
   useEffect(() => {
-    if (!props.isCartVisible && !props.isFirstRun.current) {
-      hide();
-    } else {
-      show();
+    if (!props.isFirstRun) {
+      if (!props.isCartVisible) {
+        hide();
+      } else {
+        show();
+      }
     }
   }, [props.isCartVisible]);
   const navigate = useNavigate();
+
   function logout() {
     props.setIsLoggedIn(false);
     localStorage.removeItem("token");
@@ -41,7 +45,9 @@ export default function Layout2(props: Layout2Props) {
         y: 0,
       },
     });
-    setTimeout(props.onHide, 3000);
+    setTimeout(() => {
+      props.onHide();
+    }, 3000);
   };
   function hide() {
     api.start({
@@ -55,7 +61,6 @@ export default function Layout2(props: Layout2Props) {
       },
     });
   }
-  props.isFirstRun.current = false;
   return (
     <div>
       <div className="conti">
